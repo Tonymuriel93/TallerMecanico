@@ -44,7 +44,7 @@ public class Cliente {
 
     private boolean comprobarLetraDni(String dni) {
 
-        
+
 
 
 
@@ -59,6 +59,12 @@ public class Cliente {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+
+    public static Cliente get(String dni) {
+
+
+    }
+
 
     @Override
     public String toString() {
