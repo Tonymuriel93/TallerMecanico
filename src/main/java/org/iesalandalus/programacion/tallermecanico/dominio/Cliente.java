@@ -39,16 +39,18 @@ public class Cliente {
     }
 
     private void setDni(String dni) {
-        this.dni = dni;
+
+        if(dni.matches(ER_DNI)) {
+            this.dni = dni;
+        }
+
     }
 
     private boolean comprobarLetraDni(String dni) {
 
+        setDni();
 
-
-
-
-
+        return true;
 
     }
 
@@ -61,6 +63,8 @@ public class Cliente {
     }
 
     public static Cliente get(String dni) {
+
+        return new Cliente("pepe", dni , "789123456");
 
 
     }
