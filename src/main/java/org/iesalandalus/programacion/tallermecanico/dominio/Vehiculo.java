@@ -2,60 +2,62 @@ package org.iesalandalus.programacion.tallermecanico.dominio;
 
 import java.util.Objects;
 
-public record Vehiculo() {
+public record Vehiculo(String marca, String modelo, String matricula) {
 
-        private static String ER_MARCA;
-        private static String ER_MATRICULA;
-        private String marca;
-        private String modelo;
-        private String matricula;
+        private static final String ER_MARCA = "^[a-z][A-Z]*(?:[-]?[A-Z][a-z]+)?|[A-Z]+";
+        private static final String ER_MATRICULA = "\\d{4}[^\\W_AEIOUa-z]{3}";
 
-        public Vehiculo(String marca, String modelo, String matricula) {
 
-            setMarca(marca);
-            setModelo(modelo);
-            setMatricula(matricula);
+
+        public Vehiculo {
+
+            validarMarca(marca);
+            validarModelo(modelo);
+            validarMatricula(matricula);
         }
 
-        private validarMarca(String marca) {
+        private void validarMarca(String marca) {
+            Objects.requireNonNull(marca, "La marca no puede ser nula.");
+            if(!marca.matches(ER_MARCA)) {
+                throw new IllegalArgumentException("La marca no tiene un formato no valido.");
 
-            if()
 
-
-
+            }
         }
 
-        private validarModelo(String modelo) {
+        private void validarModelo(String modelo) {
+                Objects.requireNonNull(modelo, "El modelo no puede ser nulo.");
+                if (modelo.isBlank()) {
+                    throw new IllegalArgumentException("El modelo no puede estar en blanco.");
+                }
 
 
-        }
 
-        private validarMatricula(String matricula) {
-
-
-        }
-
-        public static getVehiculo( String matricula) {
 
         }
 
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            org.iesalandalus.programacion.tallermecanico.dominio.Vehiculo vehiculo = (org.iesalandalus.programacion.tallermecanico.dominio.Vehiculo) o;
-            return Objects.equals(marca, vehiculo.marca) && Objects.equals(modelo, vehiculo.modelo) && Objects.equals(matricula, vehiculo.matricula);
-        }
+        private void validarMatricula(String matricula){
+                Objects.requireNonNull(matricula, "La matricula no puede ser nula.");
+                if (matricula.matches(ER_MATRICULA)) {
+                    throw new IllegalArgumentException("La matricula no tiene un formato valido.")
+                }
+            }
 
-        @Override
-        public int hashCode() {
-            return Objects.hash(marca, modelo, matricula);
-        }
+            public static Vehiculo get(String matricula) {return new Vehiculo("Seat", "Leon", matricula);}
 
-        @Override
-        public String toString() {
-            return String.format("[marca=%s, modelo=%s, matricula=%s]", marca, modelo, matricula);
-        }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Vehiculo vehiculo  return false;
+        Vehiculo vehiculo = (Vehiculo) o;
+        return Objects.equals(marca, vehiculo.marca) && Objects.equals(modelo, vehiculo.modelo) && Objects.equals(matricula, vehiculo.matricula);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(marca, modelo, matricula);
+    }
 }
+
+
+
