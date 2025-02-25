@@ -1,12 +1,12 @@
-package org.iesalandalus.programacion.tallermecanico.dominio;
+package org.iesalandalus.programacion.tallermecanico.modelo.dominio;
 
 import java.util.Objects;
 
 public class Cliente {
 
-    private static final String ER_NOMBRE = "";
-    private static final String ER_DNI = "\\d{8}[^\\W\\da-zOUI]";
-    private static final String ER_TELEFONO = "";
+    private static final String ER_NOMBRE = "[A-ZÁÉÍÓÚÑ][a-záéíóúüñ]+(?: [A-ZÁÉÍÓÚ][a-záéíóúüñ]+)*+";
+    private static final String ER_DNI = "\\d{8}[A-Z]";
+    private static final String ER_TELEFONO = "\\d{9}";
     private String nombre;
     private String dni;
     private String telefono;
@@ -19,8 +19,7 @@ public class Cliente {
     }
 
     public Cliente(Cliente cliente) {
-
-        Objects.requireNonNull(cliente, "El cliente no puede ser nulo");
+        Objects.requireNonNull(cliente, "No es posible copiar un cliente nulo.");
         nombre = cliente.nombre;
         dni = cliente.dni;
         telefono = cliente.telefono;
@@ -31,6 +30,7 @@ public class Cliente {
     }
 
     public void setNombre(String nombre) {
+        Objects.requireNonNull(cliente, "")
         this.nombre = nombre;
     }
 

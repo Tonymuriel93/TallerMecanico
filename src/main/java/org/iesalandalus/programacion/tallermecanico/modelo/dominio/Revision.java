@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.tallermecanico.dominio;
+package org.iesalandalus.programacion.tallermecanico.modelo.dominio;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -135,3 +135,4 @@ import java.util.Objects;
         return String.format("[fechaInicio=%s, fechaFin=%s, horas=%s, precioMaterial=%s]", fechaInicio, fechaFin, horas, precioMaterial);
     }
 }
+*/
