@@ -137,18 +137,21 @@ public class Revision {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof  Revision revision return false;
-        Revision revision = (Revision) o;
-        return horas == revision.horas && Float.compare(precioMaterial, revision.precioMaterial) == 0 && Objects.equals(fechaInicio, revision.fechaInicio) && Objects.equals(fechaFin, revision.fechaFin);
+        if (!(o instanceof  Revision revision)) return false;
+        return Objects.equals(cliente, revision.cliente) && Objects.equals(vehiculo, revision.vehiculo) && Objects.equals(fechaInicio, revision.fechaInicio);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(fechaInicio, fechaFin, horas, precioMaterial);
+        return Objects.hash(fechaInicio, vehiculo, cliente);
     }
 
     @Override
     public String toString() {
+        String cadena;
+        if(!estaCerrada()) {
+            cadena = String.format("%s - %s: (%s - ), %d horas, %.2F en material", cliente, vehiculo, fechaInicio.format(FORMATO_FECHA), horas, precioMaterial);
+        }
         return String.format("[fechaInicio=%s, fechaFin=%s, horas=%s, precioMaterial=%s]", fechaInicio, fechaFin, horas, precioMaterial);
     }
 }
