@@ -2,6 +2,7 @@ package org.iesalandalus.programacion.tallermecanico.modelo.dominio;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 public class Revision {
@@ -47,7 +48,7 @@ public class Revision {
     }
 
     public Vehiculo getVehiculo() {
-        return getVehiculo();
+        return vehiculo;
     }
 
     private void setVehiculo( Vehiculo vehiculo) {
@@ -56,7 +57,7 @@ public class Revision {
     }
 
     public LocalDate getFechaInicio() {
-        return getFechaInicio();
+        return fechaInicio;
     }
 
     private void setFechaInicio(LocalDate fechaInicio) {
@@ -69,7 +70,7 @@ public class Revision {
     }
 
     public LocalDate getFechaFin() {
-        return getFechaFin();
+        return fechaFin;
     }
 
     private void setFechaFin(LocalDate fechaFin) {
@@ -85,7 +86,7 @@ public class Revision {
     }
 
     public int getHoras() {
-        return getHoras();
+        return horas;
     }
 
     public void añadirHoras(int horas) throws TallerMecanicoExcepcion {
@@ -95,40 +96,48 @@ public class Revision {
         if(estaCerrada()) {
             throw new TallerMecanicoExcepcion("No se puede añadir horas, ya que la revision está cerrada.");
         }
-        this.horas = horas;
+        this.horas += horas;
 
     }
 
     public float getPrecioMaterial() {
-        return getPrecioMaterial();
+        return precioMaterial;
     }
 
-    public void añadirPrecioMaterial(float precioMaterial) throws
-
+    public void añadirPrecioMaterial(float precioMaterial) throws TallerMecanicoExcepcion {
+        if (precioMaterial <= 0) {
+            throw new IllegalArgumentException("El precio del material a añadir debe ser mayor que cero.");
+        }
+        if (estaCerrada()) {
+            throw new TallerMecanicoExcepcion("No se puede añadir precio del material, ya que la revisión está cerrada.");
+        }
+        this.precioMaterial += precioMaterial;
     }
 
     public boolean estaCerrada() {
-
+        return fechaFin != null;
     }
 
-    public void cerrar (LocalDate fechaFin) {
-
+    public void cerrar (LocalDate fechaFin) throws TallerMecanicoExcepcion {
+        if (estaCerrada()) {
+            throw new TallerMecanicoExcepcion("La revisión ya está cerrada.");
+        }
+        setFechaFin(fechaFin);
     }
 
     public float getPrecio() {
-
-        return getPrecio();
-
+        float precioFijo = PRECIO_DIA * getDias() + PRECIO_HORA * getHoras();
+        float precioEspecifico = PRECIO_MATERIAL * precioMaterial;
+        return precioFijo + precioEspecifico;
     }
 
-    private float getDias() {
-
+    private float getDias() { return (estaCerrada()) ? (int) ChronoUnit.DAYS.between(fechaInicio, fechaFin) : 0;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof  Revision revision return false;
         Revision revision = (Revision) o;
         return horas == revision.horas && Float.compare(precioMaterial, revision.precioMaterial) == 0 && Objects.equals(fechaInicio, revision.fechaInicio) && Objects.equals(fechaFin, revision.fechaFin);
     }
