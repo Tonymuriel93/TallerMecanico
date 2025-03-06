@@ -1,5 +1,7 @@
 package org.iesalandalus.programacion.tallermecanico.modelo.dominio;
 
+import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepcion;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -29,7 +31,7 @@ public class Revision {
     }
 
     public Revision(Revision revision) {
-        Objects.requireNonNull(revision,"La revision no puede ser nula");
+        Objects.requireNonNull(revision,"La revisión no puede ser nula.");
         cliente = new Cliente(revision.cliente);
         vehiculo = revision.vehiculo;
         fechaInicio = revision.fechaInicio;
@@ -52,7 +54,7 @@ public class Revision {
     }
 
     private void setVehiculo( Vehiculo vehiculo) {
-        Objects.requireNonNull(vehiculo, "El vehiculo no puede ser nulo.");
+        Objects.requireNonNull(vehiculo, "El vehículo no puede ser nulo.");
         this.vehiculo = vehiculo;
     }
 
@@ -63,7 +65,7 @@ public class Revision {
     private void setFechaInicio(LocalDate fechaInicio) {
         Objects.requireNonNull(fechaInicio, "La fecha de inicio no puede ser nula.");
         if(fechaInicio.isAfter(LocalDate.now())) {
-            throw new IllegalArgumentException("la fecha de inicio no puede ser futura.");
+            throw new IllegalArgumentException("La fecha de inicio no puede ser futura.");
         }
 
         this.fechaInicio = fechaInicio;
@@ -76,7 +78,7 @@ public class Revision {
     private void setFechaFin(LocalDate fechaFin) {
         Objects.requireNonNull(fechaFin, "La fecha de fin no puede ser nula.");
         if(fechaFin.isBefore(fechaInicio)) {
-            throw new IllegalArgumentException("La fecha fin no puede ser anterior a la fecha de inicio.");
+            throw new IllegalArgumentException("La fecha de fin no puede ser anterior a la fecha de inicio.");
         }
         if(fechaFin.isAfter(LocalDate.now())) {
             throw new IllegalArgumentException("La fecha de fin no puede ser futura.");
@@ -89,12 +91,12 @@ public class Revision {
         return horas;
     }
 
-    public void añadirHoras(int horas) throws TallerMecanicoExcepcion {
+    public void anadirHoras(int horas) throws TallerMecanicoExcepcion {
         if(horas <= 0) {
             throw new IllegalArgumentException("Las horas a añadir deben ser mayores que cero.");
         }
         if(estaCerrada()) {
-            throw new TallerMecanicoExcepcion("No se puede añadir horas, ya que la revision está cerrada.");
+            throw new TallerMecanicoExcepcion("No se puede añadir horas, ya que la revisión está cerrada.");
         }
         this.horas += horas;
 
@@ -104,7 +106,7 @@ public class Revision {
         return precioMaterial;
     }
 
-    public void añadirPrecioMaterial(float precioMaterial) throws TallerMecanicoExcepcion {
+    public void anadirPrecioMaterial(float precioMaterial) throws TallerMecanicoExcepcion {
         if (precioMaterial <= 0) {
             throw new IllegalArgumentException("El precio del material a añadir debe ser mayor que cero.");
         }
@@ -150,8 +152,11 @@ public class Revision {
     public String toString() {
         String cadena;
         if(!estaCerrada()) {
-            cadena = String.format("%s - %s: (%s - ), %d horas, %.2F en material", cliente, vehiculo, fechaInicio.format(FORMATO_FECHA), horas, precioMaterial);
+            cadena = String.format("%s - %s: (%s - ), %d horas, %.2f € en material", cliente, vehiculo, fechaInicio.format(FORMATO_FECHA), horas, precioMaterial);
         }
-        return String.format("[fechaInicio=%s, fechaFin=%s, horas=%s, precioMaterial=%s]", fechaInicio, fechaFin, horas, precioMaterial);
+        else {
+            cadena = String.format("%s - %s: (%s - %s), %d horas, %.2f € en material, %.2f € total", cliente,vehiculo, fechaInicio.format(FORMATO_FECHA), fechaFin.format(FORMATO_FECHA), horas, precioMaterial, getPrecio());
+        }
+        return cadena;
     }
 }
