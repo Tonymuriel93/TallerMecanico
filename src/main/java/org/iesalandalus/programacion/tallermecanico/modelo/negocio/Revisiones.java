@@ -20,7 +20,7 @@ public class Revisiones {
     }
     public List<Revision> get(Cliente cliente) {
         List<Revision> revisionesCliente = new ArrayList<>();
-        for(Revision revision = coleccionRevisiones) {
+        for(Revision revision : coleccionRevisiones) {
             if(revision.getCliente().equals(cliente)) {
                 revisionesCliente.add(revision);
             }
@@ -37,7 +37,7 @@ public class Revisiones {
         return revisionesVehiculo;
     }
     public void insertar(Revision revision) throws TallerMecanicoExcepcion {
-        Objects.requireNonNull(revision, "No se puede insertar una revision nula.");
+        Objects.requireNonNull(revision, "No se puede insertar una revisión nula.");
         comprobarRevision(revision.getCliente(), revision.getVehiculo(), revision.getFechaInicio());
         coleccionRevisiones.add(revision);
     }
@@ -47,13 +47,13 @@ public class Revisiones {
                 if (revision.getCliente().equals(cliente)) {
                     throw new TallerMecanicoExcepcion("El cliente tiene otra revisión en curso.");
                 } else if (revision.getVehiculo().equals(vehiculo)) {
-                    throw new TallerMecanicoExcepcion("El vehiculo esta actualmente en revisión.");
+                    throw new TallerMecanicoExcepcion("El vehículo está actualmente en revisión.");
                 }
             } else {
                 if(revision.getCliente().equals(cliente) && !fechaRevision.isAfter(revision.getFechaFin())) {
-                    throw new TallerMecanicoExcepcion("El cliente tiene una revision posterior.");
+                    throw new TallerMecanicoExcepcion("El cliente tiene una revisión posterior.");
                 } else if (revision.getVehiculo(). equals(vehiculo) && !fechaRevision.isAfter(revision.getFechaFin())) {
-                    throw new TallerMecanicoExcepcion("El vehiculo tiene una revision posterior.");
+                    throw new TallerMecanicoExcepcion("El vehículo tiene una revisión posterior.");
                 }
             }
         }
@@ -68,14 +68,34 @@ public class Revisiones {
         Objects.requireNonNull(revision, "No puedo operar sobre una revisión nula.");
         Revision revisionEncontrada = buscar(revision);
         if (revisionEncontrada == null) {
-            throw new TallerMecanicoExcepcion("No existe ninguna revision igual.");
+            throw new TallerMecanicoExcepcion("No existe ninguna revisión igual.");
         }
         return revisionEncontrada;
     }
     public Revision anadirPrecioMaterial(Revision revision, float precioMaterial) throws TallerMecanicoExcepcion {
         Revision revisionEncontrada = getRevision(revision);
-        revisionEncontrada
+        revisionEncontrada.anadirPrecioMaterial(precioMaterial);
+        return revisionEncontrada;
     }
+    public Revision cerrar(Revision revision, LocalDate fechaFin) throws TallerMecanicoExcepcion {
+        Revision revisionEncontrada = getRevision(revision);
+        revisionEncontrada.cerrar(fechaFin);
+        return revisionEncontrada;
+    }
+    public Revision buscar(Revision revision) {
+        Objects.requireNonNull(revision, "No se puede buscar una revisión nula.");
+        int indice = coleccionRevisiones.indexOf(revision);
+        return (indice == -1) ? null : coleccionRevisiones.get(indice);
 
+    }
+    public void borrar(Revision revision) throws TallerMecanicoExcepcion {
+        Objects.requireNonNull(revision, "No se puede borrar una revisión nula.");
+        if (!coleccionRevisiones.contains(revision)) {
+            throw new TallerMecanicoExcepcion("No existe ninguna revisión igual.");
+        }
+        coleccionRevisiones.remove(revision);
+    }
 }
+
+
 
