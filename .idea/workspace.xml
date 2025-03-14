@@ -376,7 +376,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741786640101</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Commit inicial con el enunciado, las dependencias y los tests.">
+      <option name="closed" value="true" />
+      <created>1741958661334</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1741958661334</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

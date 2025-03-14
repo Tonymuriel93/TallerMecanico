@@ -1,6 +1,8 @@
 package org.iesalandalus.programacion.tallermecanico.vista;
 
 import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepcion;
+import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Cliente;
+import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo;
 
 import java.util.Objects;
 
@@ -52,7 +54,25 @@ public class Vista {
 
     private void insertarVehiculo() throws TallerMecanicoExcepcion {
         Consola.mostrarCabecera("Insertar Vehiculo");
-        controlador
+        controlador.insertar(Consola.leerVehiculo());
+        System.out.println("Vehiculo insertado correctamente.");
+    }
+
+    private void insertarRevision() throws TallerMecanicoExcepcion {
+        Consola.mostrarCabecera("Insertar Revisión");
+        controlador.insertar(Consola.leerRevision());
+        System.out.println("Revisión insertada correctamente.");
+    }
+
+    private void buscarCliente() {
+        Consola.mostrarCabecera("Buscar cliente");
+        Cliente cliente = controlador.buscar(Consola.leerClienteDni());
+        System.out.println((cliente != null) ? cliente : "No existe ningún cliente con dicho DNI.");
+    }
+
+    private void buscarVehiculo() {
+        Consola.mostrarCabecera("Buscar Vehículo");
+        Vehiculo vehiculo = controlador.buscar(Consola.leerVehiculoMatricula());
     }
 
 
