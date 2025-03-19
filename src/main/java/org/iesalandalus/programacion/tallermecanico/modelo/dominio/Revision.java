@@ -19,6 +19,7 @@ public class Revision {
     private LocalDate fechaFin;
     private int horas;
     private float precioMaterial;
+    private static final float FACTOR_HORA =
 
     public Revision(Cliente cliente, Vehiculo vehiculo, LocalDate fechaInicio) {
         setCliente(cliente);
@@ -38,6 +39,7 @@ public class Revision {
         fechaFin = revision.fechaFin;
         horas = revision.horas;
         precioMaterial = revision.precioMaterial;
+        FACTOR_HORA =
     }
 
     public Cliente getCliente() {
