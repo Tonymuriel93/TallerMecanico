@@ -7,6 +7,7 @@ import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Revision;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 public class Controlador {
@@ -65,5 +66,21 @@ public class Controlador {
     public Revision cerrar(Revision revision, LocalDate fechaFin) throws TallerMecanicoExcepcion {
         return modelo.cerrar(revision, fechaFin);
     }
+
+    public void borrar(Cliente cliente) {modelo.borrar(cliente);}
+
+    public void borrar(Vehiculo vehiculo) {modelo.borrar(vehiculo);}
+
+    public void borrar(Revision revision) {modelo.borrar(revision);}
+
+    public List<Cliente> getClientes() { return  modelo.getClientes();}
+
+    public List<Vehiculo> getVehiculos() { return  modelo.getVehiculos();}
+
+    public List<Revision> getRevisiones() { return  modelo.getRevisiones();}
+
+    public List<Revision> getRevisiones(Cliente cliente) { return  modelo.getRevisiones(cliente);}
+
+    public List<Revision> getRevisiones(Vehiculo vehiculo) { return  modelo.getRevisiones(vehiculo);}
 
 }

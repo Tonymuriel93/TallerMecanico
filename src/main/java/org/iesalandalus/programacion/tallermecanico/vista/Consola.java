@@ -55,7 +55,7 @@ public class Consola {
     }
 
     private static LocalDate leerFecha(String mensaje) {
-        localDate fecha;
+        LocalDate fecha;
         DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern(CADENA_FORMATO_FECHA);
         mensaje = String.format("%s (%s):", mensaje, CADENA_FORMATO_FECHA);
         try {
