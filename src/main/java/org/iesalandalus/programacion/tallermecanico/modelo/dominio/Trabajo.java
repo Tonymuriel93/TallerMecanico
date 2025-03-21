@@ -29,6 +29,10 @@ public class Trabajo {
 
     }
 
+    private setCliente(Cliente cliente) {
+
+    }
+
 
 
 
