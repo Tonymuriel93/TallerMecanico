@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
-public class Revision {
+public class Revision extends Trabajo {
 
     private static final float PRECIO_HORA = 30F;
     private static final float PRECIO_DIA = 10F;
@@ -28,6 +28,7 @@ public class Revision {
         fechaFin = null;
         horas = 0;
         precioMaterial = 0;
+        super(cliente, vehiculo, fechaInicio);
 
     }
 
@@ -39,6 +40,7 @@ public class Revision {
         fechaFin = revision.fechaFin;
         horas = revision.horas;
         precioMaterial = revision.precioMaterial;
+        super(revision);
     }
 
     public Cliente getCliente() {
@@ -145,18 +147,18 @@ public class Revision {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(fechaInicio, vehiculo, cliente);
+    public float getPrecioEspecifico() {
+        return (estaCerrado()) ? FACTOR_HORA * getHoras() : 0;
     }
 
     @Override
     public String toString() {
         String cadena;
         if(!estaCerrada()) {
-            cadena = String.format("%s - %s: (%s - ), %d horas, %.2f € en material", cliente, vehiculo, fechaInicio.format(FORMATO_FECHA), horas, precioMaterial);
+            cadena = String.format("Revision -> %s - %s: (%s - ), %d horas", getCliente(), getVehiculo(), getFechaInicio().format(FORMATO_FECHA), getHoras());
         }
         else {
-            cadena = String.format("%s - %s: (%s - %s), %d horas, %.2f € en material, %.2f € total", cliente,vehiculo, fechaInicio.format(FORMATO_FECHA), fechaFin.format(FORMATO_FECHA), horas, precioMaterial, getPrecio());
+            cadena = String.format("Revision -> %s - %s: (%s - %s), %d horas, %.2f € total", getCliente(), getVehiculo(), getFechaInicio().format(FORMATO_FECHA), getPrecio());
         }
         return cadena;
     }
