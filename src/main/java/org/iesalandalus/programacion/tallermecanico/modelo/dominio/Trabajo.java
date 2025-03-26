@@ -4,7 +4,10 @@ import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepci
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
+
+import static org.iesalandalus.programacion.tallermecanico.modelo.dominio.Revision.FACTOR_HORA;
 
 public abstract class Trabajo {
 
@@ -56,14 +59,18 @@ public abstract class Trabajo {
 
     }
 
-    private setCliente(Cliente cliente) {
-
+    private void setCliente(Cliente cliente) {
+        Objects.requireNonNull(cliente, "El cliente no puede ser nulo.");
+        this.cliente = cliente;
     }
 
     public Vehiculo getVehiculo() {
         return vehiculo;
     }
-    private setVehiculo() {
+    private void setVehiculo( Vehiculo vehiculo) {
+        Objects.requireNonNull(vehiculo, "El vehículo no puede ser nulo.");
+        this.vehiculo = vehiculo;
+    }
 
     }
 
@@ -71,7 +78,16 @@ public abstract class Trabajo {
         return fechaInicio;
     }
 
-    private setFechaInicio() {
+    private void setFechaInicio(LocalDate fechaInicio) {
+        Objects.requireNonNull(fechaInicio, "La fecha de inicio no puede ser nula.");
+        if(fechaInicio.isAfter(LocalDate.now())) {
+            throw new IllegalArgumentException("La fecha de inicio no puede ser futura.");
+        }
+
+        this.fechaInicio = fechaInicio;
+    }
+
+
 
     }
     public LocalDate getFechaFin() {
@@ -100,7 +116,7 @@ public abstract class Trabajo {
                 if(horas <= 0) {
                     throw new IllegalArgumentException("Las horas a añadir deben ser mayores que cero.");
                 }
-                if(estaCerrada()) {
+                if(estaCerrado()) {
                     throw new TallerMecanicoExcepcion("No se puede añadir horas, ya que la revisión está cerrada.");
                 }
                 this.horas += horas;
@@ -111,7 +127,7 @@ public abstract class Trabajo {
         }
 
         public void cerrar (LocalDate fechaFin) throws TallerMecanicoExcepcion {
-            if (estaCerrada()) {
+            if (estaCerrado()) {
                 throw new TallerMecanicoExcepcion("La revisión ya está cerrada.");
             }
             setFechaFin(fechaFin);
@@ -120,8 +136,26 @@ public abstract class Trabajo {
     }
 
     public float getPrecio() {
+    float precioFijo = PRECIO_DIA * getDias() + PRECIO_HORA * getHoras();
+    float precioEspecifico = PRECIO_MATERIAL * precioMaterial;
+    return precioFijo + precioEspecifico;
 
     }
+
+    private float getPrecioFijo() {
+
+
+    }
+
+private float getDias() { return (estaCerrado()) ? (int) ChronoUnit.DAYS.between(fechaInicio, fechaFin) : 0;}
+
+
+public float getPrecioEspecifico() {
+    return (estaCerrado()) ? FACTOR_HORA * getHoras() : 0;
+
+}
+
+
 
 
 
