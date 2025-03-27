@@ -1,6 +1,6 @@
 package org.iesalandalus.programacion.tallermecanico.vista;
 
-import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Cliente;
+/*import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Revision;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo;
 import org.iesalandalus.programacion.utilidades.Entrada;
@@ -107,5 +107,7 @@ public class Consola {
 
     public static LocalDate leerFechaCierre() {return leerFecha("Introduce la fecha de cierre");}
 }
+
+ */
 
 

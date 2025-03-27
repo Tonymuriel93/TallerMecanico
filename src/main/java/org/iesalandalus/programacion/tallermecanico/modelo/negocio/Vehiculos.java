@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Vehiculos {
+/*public class Vehiculos implements IVehiculos {
     private final List<Vehiculo> coleccionVehiculos;
     public Vehiculos() {
         coleccionVehiculos = new ArrayList<>();
@@ -35,3 +35,5 @@ public class Vehiculos {
         coleccionVehiculos.remove(vehiculo);
     }
 }
+
+ */
