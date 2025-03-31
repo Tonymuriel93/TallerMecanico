@@ -2,9 +2,7 @@ package org.iesalandalus.programacion.tallermecanico.modelo.cascada;
 
 import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepcion;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Cliente;
-import org.iesalandalus.programacion.tallermecanico.modelo.negocio.FabricaFuenteDatos;
-import org.iesalandalus.programacion.tallermecanico.modelo.negocio.IFuenteDatos;
-import org.iesalandalus.programacion.tallermecanico.modelo.negocio.ITrabajos;
+import org.iesalandalus.programacion.tallermecanico.modelo.negocio.*;
 
 import java.util.Objects;
 

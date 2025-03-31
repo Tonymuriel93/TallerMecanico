@@ -1,11 +1,12 @@
 package org.iesalandalus.programacion.tallermecanico.modelo;
 
-/*import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Cliente;
+import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Revision;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo;
-import org.iesalandalus.programacion.tallermecanico.modelo.negocio.Clientes;
+import org.iesalandalus.programacion.tallermecanico.modelo.memoria.Clientes;
+import org.iesalandalus.programacion.tallermecanico.modelo.memoria.Trabajos;
 import org.iesalandalus.programacion.tallermecanico.modelo.negocio.Revisiones;
-import org.iesalandalus.programacion.tallermecanico.modelo.negocio.Vehiculos;
+import org.iesalandalus.programacion.tallermecanico.modelo.memoria.Vehiculos;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.Objects;
 public class Modelo {
     private Clientes clientes;
     private Vehiculos vehiculos;
-    private Revisiones revisiones;
+    private Trabajos trabajos;
 
     public Modelo() {
         comenzar();
@@ -24,7 +25,7 @@ public class Modelo {
     public void comenzar() {
         clientes = new Clientes();
         vehiculos = new Vehiculos();
-        revisiones = new Revisiones();
+        trabajos = new Trabajos();
     }
 
     public void terminar() {
@@ -39,10 +40,10 @@ public class Modelo {
         vehiculos.insertar(vehiculo);
     }
 
-    public void insertar(Revision revision) throws TallerMecanicoExcepcion {
-        Cliente cliente = clientes.buscar(revision.getCliente());
-        Vehiculo vehiculo = vehiculos.buscar(revision.getVehiculo());
-        revisiones.insertar(new Revision(cliente, vehiculo, revision.getFechaInicio()));
+    public void insertar(Revision trabajo) throws TallerMecanicoExcepcion {
+        Cliente cliente = clientes.buscar(trabajo.getCliente());
+        Vehiculo vehiculo = vehiculos.buscar(trabajo.getVehiculo());
+        trabajos.insertar(new Revision(cliente, vehiculo, trabajo.getFechaInicio()));
     }
 
     public Cliente buscar(Cliente cliente) {
@@ -56,7 +57,7 @@ public class Modelo {
     }
 
     public Revision buscar(Revision revision) {
-        revision = Objects.requireNonNull(revisiones.buscar(revision), "No existe una revisión igual.");
+        trabajo = Objects.requireNonNull(trabajos.buscar(revision), "No existe una revisión igual.");
         return new Revision(revision);
     }
 
@@ -130,4 +131,4 @@ public class Modelo {
 
 }
 
- */
+

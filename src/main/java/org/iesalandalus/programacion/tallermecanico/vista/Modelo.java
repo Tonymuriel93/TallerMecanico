@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.tallermecanico.modelo.cascada;
+package org.iesalandalus.programacion.tallermecanico.vista;
 
 import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepcion;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Cliente;

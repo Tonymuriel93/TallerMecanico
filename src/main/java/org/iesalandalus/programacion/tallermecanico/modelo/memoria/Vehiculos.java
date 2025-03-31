@@ -1,13 +1,14 @@
-package org.iesalandalus.programacion.tallermecanico.modelo.negocio;
+package org.iesalandalus.programacion.tallermecanico.modelo.memoria;
 
 import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepcion;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo;
+import org.iesalandalus.programacion.tallermecanico.modelo.negocio.IVehiculos;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/*public class Vehiculos implements IVehiculos {
+public class Vehiculos implements IVehiculos {
     private final List<Vehiculo> coleccionVehiculos;
     public Vehiculos() {
         coleccionVehiculos = new ArrayList<>();
@@ -36,4 +37,4 @@ import java.util.Objects;
     }
 }
 
- */
+
