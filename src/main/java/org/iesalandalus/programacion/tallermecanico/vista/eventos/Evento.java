@@ -3,6 +3,7 @@ package org.iesalandalus.programacion.tallermecanico.vista.eventos;
 import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepcion;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public enum Evento {
     INSERTAR_CLIENTE(11, "Insertar cliente."),

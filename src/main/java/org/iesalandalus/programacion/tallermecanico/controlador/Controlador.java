@@ -62,6 +62,8 @@ public class Controlador implements IControlador{
                 vista.notificarResultado(evento, resultado, true);
             }
         } catch (Exception e) {
+            vista.modificar
+        }
     }
 
 
