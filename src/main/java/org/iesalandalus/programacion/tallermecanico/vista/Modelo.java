@@ -1,11 +1,11 @@
-package org.iesalandalus.programacion.tallermecanico.modelo;
+package org.iesalandalus.programacion.tallermecanico.vista;
 
+import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepcion;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Trabajo;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public interface Modelo {
     void comenzar();
@@ -28,7 +28,7 @@ public interface Modelo {
 
     Trabajo anadirHoras(Trabajo trabajo, int horas) throws TallerMecanicoExcepcion;
 
-    Trabajo anadirPrecioMaterial(Trabajo trabajo, float precioMaterial) throws TallerMecanicoExcepcion;
+    Trabajo anadirPrecioMaterial(Trabajo trabajo, float precioMaterial) throws  TallerMecanicoExcepcion;
 
     Trabajo cerrar(Trabajo trabajo, LocalDate fechaFin) throws TallerMecanicoExcepcion;
 
@@ -37,14 +37,4 @@ public interface Modelo {
     void borrar(Vehiculo vehiculo) throws TallerMecanicoExcepcion;
 
     void borrar(Trabajo trabajo) throws TallerMecanicoExcepcion;
-
-    List<Cliente> getClientes();
-
-    List<Vehiculo> getVehiculos();
-
-    List<Trabajo> getTrabajos();
-
-    List<Trabajo> getTrabajos(Cliente cliente);
-
-    List<Trabajo> getTrabajos(Vehiculo vehiculo);
 }
