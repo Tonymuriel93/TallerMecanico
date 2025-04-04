@@ -10,12 +10,11 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Consola {
-
-    private static final String CADENA_FORMATO_FECHA = "dd/MM/yyyy";
+    private static String CADENA_FORMATO_FECHA = "dd/MM/yyyy";
 
     private Consola() {}
 
-    public static  void mostrarCabecera(String mensaje) {
+    public static void mostrarCabecera(String mensaje) {
         System.out.printf("%n%s%n", mensaje);
         System.out.printf("-".repeat(mensaje.length()).concat("%n%n"));
     }
@@ -27,11 +26,11 @@ public class Consola {
         }
     }
 
-    public static  Opcion elegirOpcion() {
+    public static Opcion elegirOpcion() {
         Opcion opcion = null;
         do {
             try {
-                opcion = Opcion.get(leerEntero("\nElige un opción:"));
+                opcion = Opcion.get(leerEntero("\nElige una opción: "));
             } catch (IllegalArgumentException e) {
                 System.out.printf("ERROR: %s%n", e.getMessage());
             }
@@ -55,9 +54,9 @@ public class Consola {
     }
 
     private static LocalDate leerFecha(String mensaje) {
-        localDate fecha;
+        LocalDate fecha;
         DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern(CADENA_FORMATO_FECHA);
-        mensaje = String.format("%s (%s):", mensaje, CADENA_FORMATO_FECHA);
+        mensaje = String.format("%s (%s): ", mensaje, CADENA_FORMATO_FECHA);
         try {
             fecha = LocalDate.parse(leerCadena(mensaje), formatoFecha);
         } catch (DateTimeParseException e) {
@@ -65,47 +64,53 @@ public class Consola {
         }
         return fecha;
     }
+
     public static Cliente leerCliente() {
-        String nombre = leerCadena("Introduce el nombre:");
-        String dni = leerCadena("Introduce el DNI:");
-        String telefono = leerCadena("Introduce el teléfono:");
-        return new Cliente(nombre,dni,telefono);
+        String nombre = leerCadena("Introduzca el nombre: ");
+        String dni = leerCadena("Introduzca el DNI: ");
+        String telefono = leerCadena("Introduzca el teléfono: ");
+        return new Cliente(nombre, dni, telefono);
     }
 
     public static Cliente leerClienteDni() {
-        return Cliente.get(leerCadena("Introduce el DNI:"));
+        return Cliente.get(leerCadena("Introduzca el DNI: "));
     }
 
     public static String leerNuevoNombre() {
-        return leerCadena("Introduce el nuevo nombre:");
+        return leerCadena("Introduce el nuevo nombre: ");
     }
 
-    public static String leerNuevoTelefono()
-    { return leerCadena("Introduce el nuevo teléfono:");}
-
-    public  static Vehiculo leerVehiculo () {
-        String marca = leerCadena("Introduce la marca:");
-        String modelo = leerCadena("Introduce el modelo:");
-        String matricula = leerCadena("Introduce la matricula:");
-        return new Vehiculo(marca,modelo,matricula);
+    public static String leerNuevoTelefono() {
+        return leerCadena("Introduce el nuevo teléfono: ");
     }
 
-    public static Vehiculo leerVehiculoMatricula() {return Vehiculo.get(leerCadena("Introduce la matricula"));}
+    public static Vehiculo leerVehiculo() {
+        String marca = leerCadena("Introduce la marca: ");
+        String modelo = leerCadena("Introduce el modelo: ");
+        String matricula = leerCadena("Introduce la matrícula: ");
+        return new Vehiculo(marca, modelo, matricula);
+    }
+
+    public static Vehiculo leerVehiculoMatricula() {
+        return Vehiculo.get(leerCadena("Introduzca la matrícula: "));
+    }
 
     public static Revision leerRevision() {
-        Cliente cliente = leerCliente();
+        Cliente cliente = leerClienteDni();
         Vehiculo vehiculo = leerVehiculoMatricula();
-        LocalDate fechaInicio = leerFecha("Introduce la fecha de inicio");
-        return new Revision(cliente,vehiculo,fechaInicio);
+        LocalDate fechaInicio = leerFecha("Introduce la fecha de inicio: ");
+        return new Revision(cliente, vehiculo, fechaInicio);
     }
 
     public static int leerHoras() {
-        return leerEntero("Introduce las horas a añadir:");
+        return leerEntero("Intoduce las horas a añadir: ");
     }
 
-    public static float leerPrecioMaterial() {return leerReal("Introduce el precio del material a añadir:");}
+    public static float leerPrecioMaterial() {
+        return leerReal("Introduce el precio del material a añadir: ");
+    }
 
-    public static LocalDate leerFechaCierre() {return leerFecha("Introduce la fecha de cierre");}
+    public static LocalDate leerFechaCierre() {
+        return leerFecha("Introduce la fecha de cierre");
+    }
 }
-
-
